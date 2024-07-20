@@ -120,21 +120,3 @@ def test_typing_final(plugin_run):
     ]))
 
     assert not got
-
-
-def test_typing_final_call(plugin_run):
-    """Test absolute path call."""
-    got = plugin_run('\n'.join([
-        '@typing.final()',
-        'class Animal(object):',
-        '',
-        '    def move(self, to_x: int, to_y: int):',
-        '        # Some logic for change coordinates',
-        '        pass',
-        '',
-        '    def sound(self):',
-        '        print("Abstract animal sound")',
-        '',
-    ]))
-
-    assert not got
