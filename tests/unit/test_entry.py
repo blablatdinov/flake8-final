@@ -120,3 +120,28 @@ def test_typing_final(plugin_run):
     ]))
 
     assert not got
+
+
+@pytest.mark.parametrize('base_class', [
+    'Protocol',
+    'typing.Protocol',
+    't.Protocol',
+    't.Protocol, OtherClass',
+    'OtherClass, Protocol',
+    'OtherClass, t.Protocol',
+])
+def test_protocols(plugin_run, base_class):
+    """Test protocols."""
+    got = plugin_run('\n'.join([
+        'class Animal({0}):'.format(base_class),
+        '',
+        '    def move(self, to_x: int, to_y: int):',
+        '        # Some logic for change coordinates',
+        '        pass',
+        '',
+        '    def sound(self):',
+        '        print("Abstract animal sound")',
+        '',
+    ]))
+
+    assert not got
