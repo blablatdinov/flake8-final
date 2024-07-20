@@ -23,7 +23,7 @@
 [tool.poetry]
 name = "flake8-final"
 description = "flake8 plugin for check and inheritance of implementations"
-version = "0.0.1-alpha1"
+version = "0.0.1"
 license = "MIT"
 
 authors = ["Almaz Ilaletdinov <a.ilaletdinov@yandex.ru>"]
