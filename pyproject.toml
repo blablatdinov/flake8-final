@@ -26,7 +26,7 @@ description = "flake8 plugin for check and inheritance of implementations"
 version = "0.0.1-alpha1"
 license = "MIT"
 
-authors = []
+authors = ["Almaz Ilaletdinov <a.ilaletdinov@yandex.ru"]
 
 readme = "README.md"
 
