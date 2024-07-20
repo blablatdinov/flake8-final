@@ -37,13 +37,17 @@ class ClassVisitor(ast.NodeVisitor):
         """Visit by classes."""
         final_found = False
         for base in node.bases:
+            if isinstance(base, ast.Subscript) and base.value.id == 'Protocol':
+                self.generic_visit(node)
+                return
+            if isinstance(base, ast.Subscript) and base.value.id != 'Protocol':
+                continue
             if isinstance(base, ast.Name) and base.id != 'Protocol':
                 continue
             if isinstance(base, ast.Name) and base.id == 'Protocol':
                 self.generic_visit(node)
                 return
             if base.attr == 'Protocol':
-                # assert False
                 self.generic_visit(node)
                 return
         for deco in node.decorator_list:
