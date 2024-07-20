@@ -127,6 +127,7 @@ def test_typing_final(plugin_run):
     'typing.Protocol',
     't.Protocol',
     't.Protocol, OtherClass',
+    'OtherClass, Protocol',
 ])
 def test_protocols(plugin_run, base_class):
     """Test protocols."""
