@@ -37,6 +37,8 @@ class ClassVisitor(ast.NodeVisitor):
         """Visit by classes."""
         final_found = False
         for base in node.bases:
+            if isinstance(base, ast.Name) and base.id == 'object':
+                continue
             if isinstance(base, ast.Name) and base.id == 'Protocol':
                 self.generic_visit(node)
                 return
