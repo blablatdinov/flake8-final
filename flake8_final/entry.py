@@ -43,9 +43,11 @@ class ClassVisitor(ast.NodeVisitor):
             pprint(deco)
             if isinstance(deco, ast.Call):
                 # assert False
-                final_found = final_found or deco.func.value.id == 'final'
+                final_found = final_found or deco.func.value.id in {'final', 'typing.final'}
+            elif isinstance(deco, ast.Attribute):
+                final_found = final_found or deco.attr == 'final'
             else:
-                final_found = final_found or deco.id == 'final'
+                final_found = final_found or deco.id in {'final', 'typing.final'}
         if not final_found:
             self.problems.append(node.lineno)
         self.generic_visit(node)
