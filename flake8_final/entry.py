@@ -38,11 +38,14 @@ class ClassVisitor(ast.NodeVisitor):
         from astpretty import pprint
         final_found = False
         for deco in node.decorator_list:
+            # pprint(deco)
+            print('deco = ', end='')
             pprint(deco)
             if isinstance(deco, ast.Call):
-                final_found = deco.func.id == 'final'
+                # assert False
+                final_found = final_found or deco.func.value.id == 'final'
             else:
-                final_found = deco.id == 'final'
+                final_found = final_found or deco.id == 'final'
         if not final_found:
             self.problems.append(node.lineno)
         self.generic_visit(node)
