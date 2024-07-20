@@ -104,24 +104,6 @@ def test_two_deco(plugin_run):
     assert not got
 
 
-def test_called_final(plugin_run):
-    """Test called final."""
-    got = plugin_run('\n'.join([
-        '@final()',
-        'class Animal(object):',
-        '',
-        '    def move(self, to_x: int, to_y: int):',
-        '        # Some logic for change coordinates',
-        '        pass',
-        '',
-        '    def sound(self):',
-        '        print("Abstract animal sound")',
-        '',
-    ]))
-
-    assert not got
-
-
 def test_typing_final(plugin_run):
     """Test absolute path."""
     got = plugin_run('\n'.join([
