@@ -33,7 +33,7 @@ class ClassVisitor(ast.NodeVisitor):
         """Ctor."""
         self.problems: list[int] = []
 
-    def visit_ClassDef(self, node) -> None:  # noqa: N802. Flake8 plugin API
+    def visit_ClassDef(self, node) -> None:  # noqa: N802, WPS231. Flake8 plugin API
         """Visit by classes."""
         final_found = False
         for deco in node.decorator_list:
