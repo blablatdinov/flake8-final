@@ -35,15 +35,10 @@ class ClassVisitor(ast.NodeVisitor):
 
     def visit_ClassDef(self, node) -> None:  # noqa: N802. Flake8 plugin API
         """Visit by classes."""
-        from astpretty import pprint
         final_found = False
         for deco in node.decorator_list:
-            # pprint(deco)
-            print('deco = ', end='')
-            pprint(deco)
             if isinstance(deco, ast.Call):
-                # assert False
-                final_found = final_found or deco.func.value.id in {'final', 'typing.final'}
+                continue
             elif isinstance(deco, ast.Attribute):
                 final_found = final_found or deco.attr == 'final'
             else:
