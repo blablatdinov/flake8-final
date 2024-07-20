@@ -20,17 +20,40 @@
 # OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE
 # OR OTHER DEALINGS IN THE SOFTWARE.
 
-def some_function(first: int, second: int) -> int:
-    """
-    We use this function as an example for some real logic.
+import ast
+from typing import final
 
-    This is how you can write a doctest:
 
-    .. code:: python
+@final
+class ClassVisitor(ast.NodeVisitor):
+    """Class visitor for checking final deorator."""
 
-        >>> some_function(2, 3)
-        5
+    def __init__(self):
+        """Ctor."""
+        self.problems = []
 
-    Enjoy!
-    """
-    return first + second
+    def visit_ClassDef(self, node):  # noqa: N802. Flake8 plugin API
+        """Visit by classes."""
+        final_found = False
+        for deco in node.decorator_list:
+            if deco.id == 'final':
+                final_found = True
+        if not final_found:
+            self.problems.append(node.lineno)
+        self.generic_visit(node)
+
+
+@final
+class Plugin:
+    """Flake8 plugin."""
+
+    def __init__(self, tree) -> None:
+        """Ctor."""
+        self._tree = tree
+
+    def run(self):
+        """Entry."""
+        visitor = ClassVisitor()
+        visitor.visit(self._tree)
+        for line in visitor.problems:  # noqa: WPS526
+            yield (line, 0, 'FIN100 class must be final', type(self))

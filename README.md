@@ -21,11 +21,11 @@ DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
 OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE
 OR OTHER DEALINGS IN THE SOFTWARE.
 --->
-# flake8-no-inheritance
+# flake8-final
 
-[![Build Status](https://github.com/blablatdinov/flake8-no-inheritance/workflows/test/badge.svg?branch=master&event=push)](https://github.com/blablatdinov/flake8-no-inheritance/actions?query=workflow%3Atest)
-[![codecov](https://codecov.io/gh/blablatdinov/flake8-no-inheritance/branch/master/graph/badge.svg)](https://codecov.io/gh/blablatdinov/flake8-no-inheritance)
-[![Python Version](https://img.shields.io/pypi/pyversions/flake8-no-inheritance.svg)](https://pypi.org/project/flake8-no-inheritance/)
+[![Build Status](https://github.com/blablatdinov/flake8-final/workflows/test/badge.svg?branch=master&event=push)](https://github.com/blablatdinov/flake8-final/actions?query=workflow%3Atest)
+[![codecov](https://codecov.io/gh/blablatdinov/flake8-final/branch/master/graph/badge.svg)](https://codecov.io/gh/blablatdinov/flake8-final)
+[![Python Version](https://img.shields.io/pypi/pyversions/flake8-final.svg)](https://pypi.org/project/flake8-final/)
 [![wemake-python-styleguide](https://img.shields.io/badge/style-wemake-000000.svg)](https://github.com/wemake-services/wemake-python-styleguide)
 
 flake8 plugin for check and inheritance of implementations
@@ -42,7 +42,7 @@ Inheritance is bad and that composition over inheritance is a good idea
 ## Installation
 
 ```bash
-pip install flake8-no-inheritance
+pip install flake8-final
 ```
 
 
@@ -74,7 +74,7 @@ class Cat(Human):
 
 ## License
 
-[MIT](https://github.com/blablatdinov/flake8-no-inheritance/blob/master/LICENSE)
+[MIT](https://github.com/blablatdinov/flake8-final/blob/master/LICENSE)
 
 
 ## Credits

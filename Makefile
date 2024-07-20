@@ -24,7 +24,7 @@ SHELL:=/usr/bin/env bash
 
 .PHONY: lint
 lint:
-	poetry run mypy flake8_no_inheritance tests/**/*.py
+	poetry run mypy flake8_final tests/**/*.py
 	poetry run flake8 .
 	poetry run doc8 -q docs
 

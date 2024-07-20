@@ -69,7 +69,7 @@ We use `mypy` to run type checks on our code.
 To use it:
 
 ```bash
-mypy flake8_no_inheritance tests/**/*.py
+mypy flake8_final tests/**/*.py
 ```
 
 This step is mandatory during the CI.

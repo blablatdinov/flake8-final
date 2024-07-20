@@ -21,16 +21,16 @@
 # OR OTHER DEALINGS IN THE SOFTWARE.
 
 [tool.poetry]
-name = "flake8-no-inheritance"
+name = "flake8-final"
 description = "flake8 plugin for check and inheritance of implementations"
 version = "0.0.1-alpha1"
 license = "MIT"
 
-authors = ["Almaz Ilaletdinov <a.ilaletdinov@yandex.ru"]
+authors = ["Almaz Ilaletdinov <a.ilaletdinov@yandex.ru>"]
 
 readme = "README.md"
 
-repository = "https://github.com/blablatdinov/flake8-no-inheritance"
+repository = "https://github.com/blablatdinov/flake8-final"
 
 keywords = []
 
@@ -43,6 +43,10 @@ classifiers = [
 
 [tool.poetry.dependencies]
 python = "^3.9"
+flake8 = "^7.1"
+
+[tool.poetry.plugins."flake8.extension"]
+FIN = "flake8_final.entry:Plugin"
 
 [tool.poetry.group.test.dependencies]
 mypy = "1.11.0"
@@ -50,6 +54,7 @@ wemake-python-styleguide = "0.19.2"
 pytest = "8.2.2"
 pytest-cov = "5.0.0"
 pytest-randomly = "3.15.0"
+astpretty = "3.0.0"
 
 [build-system]
 requires = ["poetry-core>=1.2.0"]
