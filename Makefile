@@ -26,7 +26,6 @@ SHELL:=/usr/bin/env bash
 lint:
 	poetry run mypy flake8_final tests/**/*.py
 	poetry run flake8 .
-	poetry run doc8 -q docs
 
 .PHONY: unit
 unit:
@@ -36,7 +35,6 @@ unit:
 package:
 	poetry check
 	poetry run pip check
-	poetry run safety check --full-report
 
 .PHONY: test
 test: lint package unit

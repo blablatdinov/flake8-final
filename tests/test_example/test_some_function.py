@@ -30,7 +30,7 @@ from flake8_final.entry import Plugin
 @pytest.fixture
 def plugin_run():
     """Fixture for easy run plugin."""
-    def _plugin_run(code: str) -> list:  # noqa: WPS430
+    def _plugin_run(code: str) -> list[tuple[int, int, str]]:  # noqa: WPS430
         """Plugin run result."""
         plugin = Plugin(ast.parse(code))
         res = []
@@ -71,6 +71,79 @@ def test_valid(plugin_run):
     """Test valid case."""
     got = plugin_run('\n'.join([
         '@final',
+        'class Animal(object):',
+        '',
+        '    def move(self, to_x: int, to_y: int):',
+        '        # Some logic for change coordinates',
+        '        pass',
+        '',
+        '    def sound(self):',
+        '        print("Abstract animal sound")',
+        '',
+    ]))
+
+    assert not got
+
+
+def test_two_deco(plugin_run):
+    """Test two decorator case."""
+    got = plugin_run('\n'.join([
+        '@final',
+        '@attrs.define(frozen=True)',
+        'class Animal(object):',
+        '',
+        '    def move(self, to_x: int, to_y: int):',
+        '        # Some logic for change coordinates',
+        '        pass',
+        '',
+        '    def sound(self):',
+        '        print("Abstract animal sound")',
+        '',
+    ]))
+
+    assert not got
+
+
+def test_called_final(plugin_run):
+    """Test called final."""
+    got = plugin_run('\n'.join([
+        '@final()',
+        'class Animal(object):',
+        '',
+        '    def move(self, to_x: int, to_y: int):',
+        '        # Some logic for change coordinates',
+        '        pass',
+        '',
+        '    def sound(self):',
+        '        print("Abstract animal sound")',
+        '',
+    ]))
+
+    assert not got
+
+
+def test_typing_final(plugin_run):
+    """Test absolute path."""
+    got = plugin_run('\n'.join([
+        '@typing.final',
+        'class Animal(object):',
+        '',
+        '    def move(self, to_x: int, to_y: int):',
+        '        # Some logic for change coordinates',
+        '        pass',
+        '',
+        '    def sound(self):',
+        '        print("Abstract animal sound")',
+        '',
+    ]))
+
+    assert not got
+
+
+def test_typing_final_call(plugin_run):
+    """Test absolute path call."""
+    got = plugin_run('\n'.join([
+        '@typing.final()',
         'class Animal(object):',
         '',
         '    def move(self, to_x: int, to_y: int):',

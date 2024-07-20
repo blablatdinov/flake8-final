@@ -21,6 +21,7 @@
 # OR OTHER DEALINGS IN THE SOFTWARE.
 
 import ast
+from collections.abc import Generator
 from typing import final
 
 
@@ -28,16 +29,20 @@ from typing import final
 class ClassVisitor(ast.NodeVisitor):
     """Class visitor for checking final deorator."""
 
-    def __init__(self):
+    def __init__(self) -> None:
         """Ctor."""
-        self.problems = []
+        self.problems: list[int] = []
 
-    def visit_ClassDef(self, node):  # noqa: N802. Flake8 plugin API
+    def visit_ClassDef(self, node) -> None:  # noqa: N802. Flake8 plugin API
         """Visit by classes."""
+        from astpretty import pprint
         final_found = False
         for deco in node.decorator_list:
-            if deco.id == 'final':
-                final_found = True
+            pprint(deco)
+            if isinstance(deco, ast.Call):
+                final_found = deco.func.id == 'final'
+            else:
+                final_found = deco.id == 'final'
         if not final_found:
             self.problems.append(node.lineno)
         self.generic_visit(node)
@@ -51,7 +56,7 @@ class Plugin:
         """Ctor."""
         self._tree = tree
 
-    def run(self):
+    def run(self) -> Generator[tuple[int, int, str, type], None, None]:
         """Entry."""
         visitor = ClassVisitor()
         visitor.visit(self._tree)
