@@ -43,6 +43,7 @@ class ClassVisitor(ast.NodeVisitor):
                 self.generic_visit(node)
                 return
             if base.attr == 'Protocol':
+                # assert False
                 self.generic_visit(node)
                 return
         for deco in node.decorator_list:
