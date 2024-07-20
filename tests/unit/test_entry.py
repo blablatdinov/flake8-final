@@ -122,7 +122,12 @@ def test_typing_final(plugin_run):
     assert not got
 
 
-@pytest.mark.parametrize('base_class', ['Protocol', 'typing.Protocol', 't.Protocol'])
+@pytest.mark.parametrize('base_class', [
+    'Protocol',
+    'typing.Protocol',
+    't.Protocol',
+    't.Protocol, OtherClass',
+])
 def test_protocols(plugin_run, base_class):
     """Test protocols."""
     got = plugin_run('\n'.join([
