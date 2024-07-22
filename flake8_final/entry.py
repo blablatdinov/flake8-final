@@ -20,6 +20,8 @@
 # OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE
 # OR OTHER DEALINGS IN THE SOFTWARE.
 
+# flake8: noqa: WPS232, WPS226
+
 import ast
 from collections.abc import Generator
 from typing import final

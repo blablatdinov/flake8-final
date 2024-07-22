@@ -149,6 +149,7 @@ def test_protocols(plugin_run, base_class):
 
 
 def test_generic_base(plugin_run):
+    """Test generic base class."""
     got = plugin_run('\n'.join([
         '@final',
         'class Dog(Animal[Mammal]):',
