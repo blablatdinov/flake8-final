@@ -20,6 +20,8 @@
 # OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE
 # OR OTHER DEALINGS IN THE SOFTWARE.
 
+# flake8: noqa: WPS232, WPS226
+
 import ast
 from collections.abc import Generator
 from typing import final
@@ -37,13 +39,19 @@ class ClassVisitor(ast.NodeVisitor):
         """Visit by classes."""
         final_found = False
         for base in node.bases:
+            if isinstance(base, ast.Subscript):
+                if isinstance(base.value, ast.Name) and base.value.id == 'Protocol':
+                    self.generic_visit(node)
+                    return
+            if isinstance(base, ast.Subscript):
+                if isinstance(base.value, ast.Name) and base.value.id != 'Protocol':
+                    continue
             if isinstance(base, ast.Name) and base.id != 'Protocol':
                 continue
             if isinstance(base, ast.Name) and base.id == 'Protocol':
                 self.generic_visit(node)
                 return
             if base.attr == 'Protocol':
-                # assert False
                 self.generic_visit(node)
                 return
         for deco in node.decorator_list:
