@@ -24,7 +24,7 @@ OR OTHER DEALINGS IN THE SOFTWARE.
 
 # flake8-final
 
-[![Build Status](https://github.com/blablatdinov/flake8-final/workflows/test/badge.svg?branch=master&event=push)](https://github.com/blablatdinov/flake8-final/actions?query=workflow%3Atest)
+[![test](https://github.com/blablatdinov/flake8-final/actions/workflows/test.yml/badge.svg)](https://github.com/blablatdinov/flake8-final/actions/workflows/test.yml)
 [![codecov](https://codecov.io/gh/blablatdinov/flake8-final/branch/master/graph/badge.svg)](https://codecov.io/gh/blablatdinov/flake8-final)
 [![Python Version](https://img.shields.io/pypi/pyversions/flake8-final.svg)](https://pypi.org/project/flake8-final/)
 [![wemake-python-styleguide](https://img.shields.io/badge/style-wemake-000000.svg)](https://github.com/wemake-services/wemake-python-styleguide)
