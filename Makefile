@@ -24,8 +24,9 @@ SHELL:=/usr/bin/env bash
 
 .PHONY: lint
 lint:
+	poetry run ruff check flake8_final tests
 	poetry run mypy flake8_final tests/**/*.py
-	poetry run flake8 .
+	lint-venv/bin/flake8 flake8_final tests
 
 .PHONY: unit
 unit:
@@ -37,7 +38,7 @@ package:
 	poetry run pip check
 
 .PHONY: test
-test: lint package unit
+test: package unit
 
 .DEFAULT:
 	@cd docs && $(MAKE) $@
