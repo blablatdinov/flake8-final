@@ -1,6 +1,6 @@
-# The MIT License (MIT)
+# The MIT License (MIT).
 #
-# Copyright (c) 2023-2025 Almaz Ilaletdinov <a.ilaletdinov@yandex.ru>
+# Copyright (c) 2024-2025 Almaz Ilaletdinov <a.ilaletdinov@yandex.ru>
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -20,41 +20,23 @@
 # OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE
 # OR OTHER DEALINGS IN THE SOFTWARE.
 
-[tool.poetry]
-name = "flake8-final"
-description = "flake8 plugin for check and inheritance of implementations"
-version = "0.0.3"
-license = "MIT"
-
-authors = ["Almaz Ilaletdinov <a.ilaletdinov@yandex.ru>"]
-
-readme = "README.md"
-
-repository = "https://github.com/blablatdinov/flake8-final"
-
-keywords = []
-
-classifiers = [
-  "Development Status :: 3 - Alpha",
-  "Intended Audience :: Developers",
-  "Operating System :: OS Independent",
-  "Topic :: Software Development :: Libraries :: Python Modules",
-]
-
-[tool.poetry.dependencies]
-python = "^3.9"
-flake8 = "^7.1"
-
-[tool.poetry.plugins."flake8.extension"]
-FIN = "flake8_final.entry:Plugin"
-
-[tool.poetry.group.test.dependencies]
-mypy = "1.16.0"
-pytest = "8.4.0"
-pytest-cov = "6.2.1"
-pytest-randomly = "3.16.0"
-astpretty = "3.0.0"
-
-[build-system]
-requires = ["poetry-core>=1.2.0"]
-build-backend = "poetry.core.masonry.api"
+FROM python:3.13.4-slim
+ENV PIP_DISABLE_PIP_VERSION_CHECK=1
+ENV POETRY_VIRTUALENVS_IN_PROJECT=true
+ENV EC_VERSION="v3.0.3"
+ENV PATH="/root/.local/bin:$PATH"
+WORKDIR /app
+RUN cd /app
+RUN pip install poetry==2.1.3
+RUN apt-get update && apt-get install curl git -y
+RUN sh -c "$(curl --location https://taskfile.dev/install.sh)" -- -d -b /bin
+RUN curl -O -L -C - https://github.com/editorconfig-checker/editorconfig-checker/releases/download/$EC_VERSION/ec-linux-amd64.tar.gz && \
+    tar xzf ec-linux-amd64.tar.gz -C /tmp && \
+    mkdir -p /root/.local/bin && \
+    mv /tmp/bin/ec-linux-amd64 /root/.local/bin/ec
+COPY poetry.lock pyproject.toml /app/
+COPY lint-requirements.txt /app/
+RUN python3 -m venv lint-venv
+RUN ./lint-venv/bin/pip install -r lint-requirements.txt
+# RUN poetry install
+COPY . .

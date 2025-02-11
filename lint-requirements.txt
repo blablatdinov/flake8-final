@@ -1,6 +1,6 @@
-# The MIT License (MIT)
+# The MIT License (MIT).
 #
-# Copyright (c) 2023-2025 Almaz Ilaletdinov <a.ilaletdinov@yandex.ru>
+# Copyright (c) 2024-2025 Almaz Ilaletdinov <a.ilaletdinov@yandex.ru>
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -20,25 +20,16 @@
 # OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE
 # OR OTHER DEALINGS IN THE SOFTWARE.
 
-SHELL:=/usr/bin/env bash
-
-.PHONY: lint
-lint:
-	poetry run mypy flake8_final tests/**/*.py
-	poetry run flake8 .
-
-.PHONY: unit
-unit:
-	poetry run pytest
-
-.PHONY: package
-package:
-	poetry check
-	poetry run pip check
-
-.PHONY: test
-test: lint package unit
-
-.DEFAULT:
-	@cd docs && $(MAKE) $@
-
+attrs==25.1.0
+    # via wemake-python-styleguide
+flake8==7.1.1
+    # via wemake-python-styleguide
+mccabe==0.7.0
+    # via flake8
+pycodestyle==2.12.1
+    # via flake8
+pyflakes==3.2.0
+    # via flake8
+pygments==2.19.1
+    # via wemake-python-styleguide
+wemake-python-styleguide==1.0.0
