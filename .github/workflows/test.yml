@@ -64,7 +64,7 @@ jobs:
         poetry install
 
     - name: Run checks
-      run: make test
+      run: poetry run pytest
 
     # Upload coverage to codecov: https://codecov.io/
     - name: Upload coverage to Codecov
@@ -85,5 +85,6 @@ jobs:
         python3 -m venv lint-venv
         lint-venv/bin/pip install -r lint-requirements.txt
     - name: Run lint
-      run: make lint
-
+      run: |
+        poetry run ruff check flake8_final tests
+        ./lint-venv/bin/flake8 flake8_final tests
