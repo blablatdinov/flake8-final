@@ -90,6 +90,7 @@ jobs:
       run: |
         python3 -m venv lint-venv
         lint-venv/bin/pip install -r lint-requirements.txt
+        poetry install
     - name: Run lint
       run: |
         poetry run ruff check flake8_final tests
