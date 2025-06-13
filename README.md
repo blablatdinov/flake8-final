@@ -47,9 +47,9 @@ pip install flake8-final
 
 After installing the plugin, flake8 will automatically use it when you run the following command:
 
-bash
-
+```bash
 flake8 your_project_directory
+```
 
 The plugin will check each class definition to ensure it has a @final decorator. If a class is missing the @final decorator, an error will be reported.
 
