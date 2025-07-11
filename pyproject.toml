@@ -54,7 +54,7 @@ pytest = "8.4.1"
 pytest-cov = "6.2.1"
 pytest-randomly = "3.16.0"
 astpretty = "3.0.0"
-ruff = "0.12.2"
+ruff = "0.12.3"
 
 [build-system]
 requires = ["poetry-core>=1.2.0"]
