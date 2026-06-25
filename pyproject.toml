@@ -36,6 +36,7 @@ pytest-cov = "7.1.0"
 pytest-randomly = "4.1.0"
 astpretty = "3.0.0"
 ruff = "0.15.19"
+wemake-python-styleguide = "1.6.2"
 
 [build-system]
 requires = ["poetry-core>=1.2.0"]
