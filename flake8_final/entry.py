@@ -25,6 +25,8 @@ class ClassVisitor(ast.NodeVisitor):
                 return
             if isinstance(base, ast.Subscript) and isinstance(base.value, ast.Name) and base.value.id != 'Protocol':
                 continue
+            if isinstance(base, ast.Name) and base.id == 'Enum':
+                return
             if isinstance(base, ast.Name) and base.id != 'Protocol':
                 continue
             if isinstance(base, ast.Name) and base.id == 'Protocol':

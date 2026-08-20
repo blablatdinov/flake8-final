@@ -145,3 +145,15 @@ def test_generic_base(plugin_run):
     ]))
 
     assert not got
+
+
+def test_enum(plugin_run):
+    """Test enumeration."""
+    got = plugin_run('\n'.join([
+        'class Enumeration(Enum):',
+        '',
+        '   A = 1',
+        '   B = 2',
+    ]))
+
+    assert not got
