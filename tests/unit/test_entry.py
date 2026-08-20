@@ -111,6 +111,7 @@ def test_typing_final(plugin_run):
     'OtherClass, Protocol',
     'OtherClass, t.Protocol',
     'Protocol[Mammal]',
+    't.Protocol[Mammal]',
 ])
 def test_protocols(plugin_run, base_class):
     """Test protocols."""
@@ -129,11 +130,12 @@ def test_protocols(plugin_run, base_class):
     assert not got
 
 
-def test_generic_base(plugin_run):
+@pytest.mark.parametrize('base_class', ['Animal[Mammal]', 'module.Animal[Mammal]'])
+def test_generic_base(plugin_run, base_class):
     """Test generic base class."""
     got = plugin_run('\n'.join([
         '@final',
-        'class Dog(Animal[Mammal]):',
+        'class Dog({0}):'.format(base_class),
         '',
         '    def move(self, to_x: int, to_y: int):',
         '        # Some logic for change coordinates',
@@ -142,6 +144,18 @@ def test_generic_base(plugin_run):
         '    def sound(self):',
         '        print("Abstract animal sound")',
         '',
+    ]))
+
+    assert not got
+
+
+def test_enum(plugin_run):
+    """Test enumeration."""
+    got = plugin_run('\n'.join([
+        'class Enumeration(Enum):',
+        '',
+        '   A = 1',
+        '   B = 2',
     ]))
 
     assert not got

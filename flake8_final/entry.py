@@ -23,8 +23,15 @@ class ClassVisitor(ast.NodeVisitor):
             if isinstance(base, ast.Subscript) and isinstance(base.value, ast.Name) and base.value.id == 'Protocol':
                 self.generic_visit(node)
                 return
+            if isinstance(base, ast.Subscript) and isinstance(base.value, ast.Attribute) and base.value.attr == 'Protocol':
+                self.generic_visit(node)
+                return
             if isinstance(base, ast.Subscript) and isinstance(base.value, ast.Name) and base.value.id != 'Protocol':
                 continue
+            if isinstance(base, ast.Subscript) and isinstance(base.value, ast.Attribute) and base.value.attr != 'Protocol':
+                continue
+            if isinstance(base, ast.Name) and base.id == 'Enum':
+                return
             if isinstance(base, ast.Name) and base.id != 'Protocol':
                 continue
             if isinstance(base, ast.Name) and base.id == 'Protocol':

@@ -54,6 +54,7 @@ Adding the `@final` decorator will resolve the error:
 ```python
 from typing import final
 
+
 @final
 class MyClass:
     pass
