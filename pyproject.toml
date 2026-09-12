@@ -36,7 +36,7 @@ pytest-cov = "7.1.0"
 pytest-randomly = "5.0.0"
 astpretty = "3.0.0"
 ruff = "0.16.7"
-wemake-python-styleguide = "1.8.0"
+wemake-python-styleguide = "1.8.1"
 
 [tool.ruff.lint]
 # ignore = ["noqa-comments", "FLY002"]
