@@ -35,7 +35,7 @@ pytest = "9.1.1"
 pytest-cov = "7.1.0"
 pytest-randomly = "5.0.0"
 astpretty = "3.0.0"
-ruff = "0.16.8"
+ruff = "0.16.9"
 wemake-python-styleguide = "1.8.1"
 
 [tool.ruff.lint]
